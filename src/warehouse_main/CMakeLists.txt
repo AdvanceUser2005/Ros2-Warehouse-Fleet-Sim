@@ -9,6 +9,12 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 
+# Creating an executable
+add_executable(warehouse_executable src/warehouse-node-test.cpp)
+
+# Adding Dependency
+ament_target_dependencies(warehouse_executable rclcpp)
+
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   # the following line skips the linter which checks for copyrights
@@ -20,5 +26,11 @@ if(BUILD_TESTING)
   set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 endif()
+
+# Installing targets
+install( TARGETS 
+  warehouse_executable
+  DESTINATION lib/${PROJECT_NAME}
+)
 
 ament_package()
